@@ -1,1 +1,79 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
+local VelvetHub = Fluent:CreateWindow({
+    Title = "🌌 Velvet Hub 🌌 " .. Fluent.Version,
+    SubTitle = "by Atop team",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    AutoFarm = VelvetHub:AddTab({ Title = "Auto Farm", Icon = "" }), -- Renamed to Auto Farm
+    Settings = VelvetHub:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Welcome",
+        Content = "Welcome to 🌌 Velvet Hub 🌌",
+        Duration = 5
+    })
+
+    -- Button for Auto Farm Level
+    Tabs.AutoFarm:AddButton({
+        Title = "Auto Farm Level",
+        Description = "Farms levels",
+        Callback = function()
+            _G.Setting_table = {
+                Auto_Farm = false,
+                Bypass = true,
+                Fast_Attack = true,
+                -- Other settings...
+            }
+
+            -- Display confirmation dialog
+            VelvetHub:Dialog({
+                Title = "Confirm",
+                Content = "Are you sure you want to enable Auto Farm Level?",
+                Buttons = {
+                    {
+                        Title = "Confirm",
+                        Callback = function()
+                            print("Confirmed the dialog.")
+                            -- Add the code to execute when confirmed
+                        end
+                    },
+                    {
+                        Title = "Cancel",
+                        Callback = function()
+                            print("Cancelled the dialog.")
+                            -- Add the code to execute when cancelled
+                        end
+                    }
+                }
+            })
+        end
+    })
+
+    -- Button for Auto Farm Chest (Super OP)
+    Tabs.AutoFarm:AddButton({
+        Title = "Auto Farm Chest (Super OP)",
+        Description = "Farms Chest (Super OP)",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptpastebin/raw/main/Chest_onoff"))()
+        end
+    })
+
+    -- Remaining components...
+end
+
+-- Addons and configurations here
+
+return VelvetHub
